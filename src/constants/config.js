@@ -1,43 +1,53 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
+import {preload, create, update} from '../scenes/GameScene';
+
+const SPEED_DOWN = 300;
+const SIZES = {
+    HEIGHT: 2160,
+    WIDTH: 3840,
+};
 
 export const GLOBAL_CONFIG = {
-    // Game type
-    type: Phaser.AUTO,
+    /** Basic game settings */
+    type: Phaser.WEBGL,
+    parent: 'gameContainer',
+    debug: true,
 
-    // Global settings
+    /** 4k */
+    width: SIZES.WIDTH,
+    height: SIZES.HEIGHT,
+
+    /** Basic scene functions */
+    scene: {
+        preload: preload,
+        create: create,
+        update: update,
+    },
+
+    /** Global settings */
     globalSettings: {
         playerSpeed: 200,
         enemySpawnRate: 3,
-        difficulty: "normal",
+        difficulty: 'normal',
     },
 
-    // 4k resolution
-    width: 3840,
-    height: 2160,
+    /** Bg Color */
+    backgroundColor: '#1d1d1d',
 
-    // Bg color
-    backgroundColor: "#1d1d1d",
-
-    // Scaling
+    /** Scaling */
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
 
-    // Physics
+    /** Physics */
     physics: {
-        default: "arcade",
+        default: 'arcade',
         arcade: {
             gravity: {
-                y: 300,
+                y: SPEED_DOWN,
             },
-            debug: false,
+            debug: true,
         },
     },
-
-    // Game scenes
-    scenes: [],
-
-    // Debug
-    debug: true,
 };
